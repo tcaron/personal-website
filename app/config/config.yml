@@ -1,0 +1,150 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: fr
+
+framework:
+    #esi:             ~
+    #translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        # Conversion auto des time et datetime en UTC (décalage timezone = 0)
+        types:
+            time: FP\UtilsBundle\DoctrineExtensions\DBAL\Types\UTCTimeType
+            datetime: FP\UtilsBundle\DoctrineExtensions\DBAL\Types\UTCDateTimeType
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_mapping: true
+
+        dql:
+            string_functions:
+                GROUP_CONCAT: FP\UtilsBundle\DoctrineExtensions\Query\Mysql\GroupConcat
+            datetime_functions:
+                DATEDIFF: FP\UtilsBundle\DoctrineExtensions\Query\Mysql\DateDiff
+            numeric_functions:
+                IF: FP\UtilsBundle\DoctrineExtensions\Query\Mysql\IfStatement
+                IFNULL: FP\UtilsBundle\DoctrineExtensions\Query\Mysql\IfNull
+                ROUND: FP\UtilsBundle\DoctrineExtensions\Query\Mysql\Round        
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+knp_doctrine_behaviors:
+    translatable: true
+
+a2lix_translation_form:
+    locale_provider: default       # [1]
+    locales: [fr,en]      # [1-a]
+    default_locale: "%locale%"             # [1-b]
+    required_locales: [fr]         # [1-c]
+    manager_registry:     doctrine
+    templating: "A2lixTranslationFormBundle::default.html.twig"      # [2]
+
+fp_utils:
+    datetime_config:
+        fr:
+            date_format: 'd/m/Y'
+            date_format_picker: 'dd/MM/yyyy'
+            date_format_long: '%A %d %B %Y'
+            date_format_js: 'DD/MM/YYYY'
+            date_format_js_long: 'dddd D MMMM YYYY'
+            hours12: false
+            timezone_default: 'Europe/Paris'
+        en:
+            date_format: 'm/d/Y'
+            date_format_picker: 'MM/dd/yyyy'
+            date_format_long: '%d, %A %B %Y'
+            date_format_js: 'MM/DD/YYYY'
+            date_format_js_long: 'D, dddd MMMM YYYY'
+            hours12: true
+            timezone_default: 'Europe/London'
+            
+    dropzone:
+        framework:
+            class: 'FP\AdminBundle\Entity\ImageTest'
+            purge_field_name: 'associated'
+        avatars:
+            class: 'FP\UserBundle\Entity\Avatar'
+            purge_field_name: 'associated'
+        societes_logos:
+            class: 'FP\ProjetBundle\Entity\SocieteLogo'
+            purge_field_name: 'associated'
+        technologies_logos:
+            class: 'FP\ProjetBundle\Entity\TechnologieLogo'
+            purge_field_name: 'associated'
+        projets_photos_front:
+            class: 'FP\ProjetBundle\Entity\ProjetPhotoFront'
+            purge_field_name: 'projet'
+        projets_photos_admin:
+            class: 'FP\ProjetBundle\Entity\ProjetPhotoAdmin'
+            purge_field_name: 'projet'
+        partenaires_logos:
+            class: 'FP\PartenaireBundle\Entity\PartenaireLogo'
+            purge_field_name: 'associated'
+
+# Stof\DoctrineExtensionsBundle configuration
+stof_doctrine_extensions:
+    orm:
+        default:
+            timestampable: true
+            sluggable: true
+
+
+# Assetic Configuration
+assetic:
+    debug:  "%kernel.debug%"
+    use_controller: false
+    node: "%node_path%" 
+    filters:
+        uglifyjs2: 
+            bin: "%uglifyjs_path%"
+        uglifycss:
+            bin: "%uglifycss_path%"
+            

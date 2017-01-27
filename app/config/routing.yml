@@ -1,0 +1,19 @@
+website_main:
+    resource: "@WebsiteMainBundle/Resources/config/routing.yml"
+    prefix:   /
+
+website_admin:
+    resource: "@WebsiteAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+login:
+    path: /login
+    defaults: { _controller: WebsiteAdminBundle:Default:login}
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
+
+

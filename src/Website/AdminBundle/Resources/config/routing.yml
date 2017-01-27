@@ -1,0 +1,7 @@
+website_admin_homepage:
+    path:     /
+    defaults: { _controller: WebsiteAdminBundle:Default:index }
+
+website_admin_presentation:
+    path:     /gestion-presentation
+    defaults: { _controller: WebsiteAdminBundle:Presentation:index }
