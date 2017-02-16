@@ -5,15 +5,19 @@ website_main:
 website_admin:
     resource: "@WebsiteAdminBundle/Resources/config/routing.yml"
     prefix:   /admin
+    options: { i18n: false }
 
 login:
     path: /login
     defaults: { _controller: WebsiteAdminBundle:Default:login}
+    options: { i18n: false }
 
 login_check:
     path: /login_check
+    options: { i18n: false }
 
 logout:
     path: /logout
+    options: { i18n: false }
 
 

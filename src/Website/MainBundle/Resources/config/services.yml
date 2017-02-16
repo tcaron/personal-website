@@ -1,3 +1,7 @@
+imports:
+  - { resource: services/twig.yml }
+
+
 services:
 #    website_main.example:
 #        class: Website\MainBundle\Example

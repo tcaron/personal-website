@@ -21,7 +21,7 @@ security:
       security: false
 
     main:
-      pattern:   ^/
+      pattern: ^/
       anonymous: true
       provider: main
 

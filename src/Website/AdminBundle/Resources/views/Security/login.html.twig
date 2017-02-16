@@ -1,24 +1,71 @@
-{% extends 'base.html.twig' %}
-  {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/bootstrap/dist/css/signin.css') }}">
-  {% endblock %}
- {# S'il y a une erreur, on l'affiche dans un joli cadre #}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> Thomas Caron | Log in</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+ 
+          {% stylesheets filter='uglifycss'
+             '@WebsiteAdminBundle/Resources/public/css/bootstrap.min.css'
+             '@WebsiteAdminBundle/Resources/public/css/AdminLTE.min.css'
+             '@WebsiteAdminBundle/Resources/public/js/iCheck/square/blue.css'
+              %}
+            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+        {% endstylesheets %}
+         {% javascripts filter='uglifyjs2'
+              '@WebsiteAdminBundle/Resources/public/js/jquery-2.2.3.min.js'
+              '@WebsiteAdminBundle/Resources/public/js/bootstrap.min.js'
+              '@WebsiteAdminBundle/Resources/public/js/iCheck/icheck.min.js'
+             %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
 
-{% block body %}
-  {% if error %}
-    <div class="alert alert-danger">{{ error.message }}</div>
-  {% endif %}
-<div class="container">
-  {# Le formulaire, avec URL de soumission vers la route « login_check » comme on l'a vu #}
-  <form class="form-signin" action="{{ path('login_check') }}" method="post">
-    <h2 class="form-signin-heading">{% trans %}Please sign in{% endtrans %}</h2>
-    <label for="username" class="sr-only">Login :</label>
-    <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" />
 
-    <label for="password" class="sr-only">Mot de passe :</label>
-    <input type="password" class="form-control" id="password" name="_password" />
-    <br />
-    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Connexion" />
-  </form>
- </div>
-{% endblock %}
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="#"><b>Administration</b></a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Sign in to start your session</p>
+
+    <form action="{{ path('login_check') }}" method="post">
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" id="username" name="_username" placeholder="Username">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Password" id="password" name="_password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
+</body>
+</html>

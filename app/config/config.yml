@@ -3,12 +3,9 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    locale: fr
-
 framework:
+    translator:      ~
+    default_locale:  "%locale%"
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
@@ -21,7 +18,6 @@ framework:
     #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
-    default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
@@ -33,7 +29,6 @@ framework:
     assets: ~
     php_errors:
         log: true
-
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
@@ -76,16 +71,6 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-knp_doctrine_behaviors:
-    translatable: true
-
-a2lix_translation_form:
-    locale_provider: default       # [1]
-    locales: [fr,en]      # [1-a]
-    default_locale: "%locale%"             # [1-b]
-    required_locales: [fr]         # [1-c]
-    manager_registry:     doctrine
-    templating: "A2lixTranslationFormBundle::default.html.twig"      # [2]
 
 fp_utils:
     datetime_config:
@@ -147,4 +132,10 @@ assetic:
             bin: "%uglifyjs_path%"
         uglifycss:
             bin: "%uglifycss_path%"
-            
+
+
+
+jms_i18n_routing:
+    default_locale: "%locale%"
+    locales: "%locales%"
+    strategy: prefix

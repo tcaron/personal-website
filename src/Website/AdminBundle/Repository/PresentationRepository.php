@@ -1,7 +1,6 @@
 <?php
 
 namespace Website\AdminBundle\Repository;
-use Doctrine\ORM\Query;
 
 /**
  * PresentationRepository
@@ -11,5 +10,11 @@ use Doctrine\ORM\Query;
  */
 class PresentationRepository extends \Doctrine\ORM\EntityRepository
 {
-
+	public function getPresentation($locale){
+		$sql = $this->getEntityManager()
+		->createQuery("SELECT pt.description FROM WebsiteAdminBundle:Presentation p JOIN WebsiteAdminBundle:PresentationTraduction pt WHERE p.id = pt.presentation_id AND pt.locale = :locale ")
+		->setParameter('locale',$locale);
+		$presentation =  $sql->getResult();
+		return $presentation[0];
+	}
 }

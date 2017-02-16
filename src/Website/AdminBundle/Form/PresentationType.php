@@ -4,26 +4,27 @@ namespace Website\AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use A2lix\TranslationFormBundle\Form\Type\TranslationsFormsType;
-use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
-use Website\AdminBundle\Form\PresentationTranslationType;
-
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Website\AdminBundle\Form\PresentationTraductionType;
 
 class PresentationType extends AbstractType
 {
-/**
- * {@inheritdoc}
- */
-public function buildForm(FormBuilderInterface $builder, array $options)
-{
-    $builder->add('translations', TranslationsType::class)
-            ->add('save', SubmitType::class);
-    
-           
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('presentationTraduction', CollectionType::class,array(
+            'entry_type' => PresentationTraductionType::class,
+            'allow_add' => true
 
-}
+            ))
+        ->add('valider',SubmitType::class);
+
+    }
+
     /**
      * {@inheritdoc}
      */
