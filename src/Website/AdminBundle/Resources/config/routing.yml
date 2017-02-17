@@ -5,3 +5,11 @@ website_admin_homepage:
 website_admin_presentation:
     path:     /gestion-presentation
     defaults: { _controller: WebsiteAdminBundle:Presentation:index }
+
+website_admin_create_presentation:
+    path: /gestion-presentation/creation
+    defaults: { _controller: WebsiteAdminBundle:Presentation:create }
+
+website_admin_edit_presentation:
+    path: /gestion-presentation/edition/{id}
+    defaults: { _controller: WebsiteAdminBundle:Presentation:edit }

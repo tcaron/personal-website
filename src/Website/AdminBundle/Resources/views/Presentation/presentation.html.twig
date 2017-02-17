@@ -1,0 +1,20 @@
+{% extends 'WebsiteAdminBundle::layout.html.twig' %}
+
+{% block title_admin_content %}<b>Gestion de la présentation</b>{% endblock %}
+
+{% block body_admin %}
+
+	<section class="invoice">
+
+		<div class="row">
+		  <a href="{{ path('website_admin_create_presentation')}}">Creer une nouvelle presentation</a>
+          <ul>
+		  {% for presentation in presentations %}
+		  	<li><a href="{{ path('website_admin_edit_presentation', { 'id': presentation.id } )}}">{{ presentation.id }}</a></li>
+		  {% endfor %}
+			</ul>
+		</div>
+
+	</section>
+
+{% endblock %}

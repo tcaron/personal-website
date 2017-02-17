@@ -17,4 +17,5 @@ class PresentationRepository extends \Doctrine\ORM\EntityRepository
 		$presentation =  $sql->getResult();
 		return $presentation[0];
 	}
+
 }
