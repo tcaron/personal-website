@@ -18,7 +18,6 @@ class AppKernel extends Kernel
             new Website\AdminBundle\WebsiteAdminBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Website\MainBundle\WebsiteMainBundle(),
-            new FP\UtilsBundle\FPUtilsBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),

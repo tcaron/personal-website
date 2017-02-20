@@ -1,11 +1,31 @@
 {% extends 'WebsiteAdminBundle::layout.html.twig' %}
 
+
+
 {% block body_admin %}
-<section class="invoice">
+
+	<section class="invoice">
 
 		<div class="row">
-			{{form(form)}}
+			{{form_start(form)}}
+
+		  {% for trad in form.presentationTraduction.children %}
+           <div class="box box-success box-solid"> <div class="box-header with-border">{{ locales[loop.index0]|upper }}</div>
+           <div class="box-body">
+		  	{{ form_row(trad.description)}}
+		    {{ form_row(trad.locale,{'value':  locales[loop.index0] })}}
+			</div>
+			</div>
+          {% endfor %}
+
+			{{form_end(form)}}
 		</div>
-</section>		
+
+	</section>
 {% endblock %}
-	
+{% block admin_js %}
+{{parent()}}
+{% endblock %}
+
+
+

@@ -9,16 +9,16 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
           {% stylesheets filter='uglifycss'
-             '@WebsiteAdminBundle/Resources/public/css/*'
-              %}
+             '@WebsiteAdminBundle/Resources/public/css/*' %}
             <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
         {% endstylesheets %}
+         <link rel="stylesheet" href="{{ asset('admin/css/dropzone.css') }}" type="text/css"></script>
          {% javascripts filter='uglifyjs2'
               '@WebsiteAdminBundle/Resources/public/js/jquery-2.2.3.min.js'
               '@WebsiteAdminBundle/Resources/public/js/bootstrap.min.js'
               '@WebsiteAdminBundle/Resources/public/js/app.min.js'
               '@WebsiteAdminBundle/Resources/public/js/*'
-             %}
+         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
 </head>
@@ -352,6 +352,10 @@
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
 </div>
-
+{% block admin_js %}
+ <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+ <script src="{{ asset('./admin/js/dropzone.js') }}"></script>
+ <script>tinymce.init({ selector:'textarea' });</script>    
+{% endblock %}
 </body>
 </html>

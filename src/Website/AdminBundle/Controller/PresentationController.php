@@ -55,7 +55,7 @@ class PresentationController extends Controller{
         }
 
     return $this->render('WebsiteAdminBundle:Presentation:create_form.html.twig',array(
-        "form" => $form->createView() 
+        "form" => $form->createView(),
         ));
 
     }
